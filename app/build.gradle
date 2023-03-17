@@ -1,0 +1,45 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version "8.1.0"
+    id("io.micronaut.crac") version "4.0.0-SNAPSHOT"
+    id("io.micronaut.minimal.application") version "4.0.0-SNAPSHOT"
+}
+
+version = "0.1"
+group = "temp"
+
+repositories {
+    maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+        mavenContent { snapshotsOnly() }
+    }
+    mavenCentral()
+}
+
+dependencies {
+    implementation("io.micronaut:micronaut-jackson-databind")
+    implementation("io.micronaut.aws:micronaut-aws-apigateway")
+    implementation("io.micronaut.crac:micronaut-crac")
+    runtimeOnly("ch.qos.logback:logback-classic")
+    runtimeOnly("org.yaml:snakeyaml")
+
+    // https://github.com/micronaut-projects/micronaut-core/pull/8962/files
+    implementation("io.micronaut:micronaut-websocket")
+}
+
+application {
+    mainClass.set("temp.Application")
+}
+java {
+    sourceCompatibility = JavaVersion.toVersion("17")
+    targetCompatibility = JavaVersion.toVersion("17")
+}
+
+micronaut {
+    runtime("lambda_java")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("temp.*")
+    }
+}
+
+

@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: temp
+testFramework: junit
+sourceLanguage: java
+buildTool: gradle
+features: [amazon-api-gateway-http, annotation-api, app-name, aws-cdk, aws-lambda, aws-lambda-handler-default, crac, gradle, jackson-databind, java, java-application, junit, logback, micronaut-build, readme, shade, snapstart, x86, yaml]

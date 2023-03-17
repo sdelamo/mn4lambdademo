@@ -1,0 +1,28 @@
+plugins {
+    id("application") 
+    id("java") 
+}
+
+repositories {
+    maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+        mavenContent { snapshotsOnly() }
+    }
+    mavenCentral()
+}
+
+dependencies {
+    implementation platform("io.micronaut:micronaut-bom:3.9.0-SNAPSHOT")
+    implementation("io.micronaut.aws:micronaut-aws-cdk")
+    implementation("software.amazon.awscdk:apigatewayv2-alpha:2.42.1-alpha.0")
+    implementation("software.amazon.awscdk:apigatewayv2-integrations-alpha:2.44.0-alpha.0")
+    testImplementation platform("io.micronaut:micronaut-bom:3.9.0-SNAPSHOT")
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine")
+}
+application {
+    mainClass.set("temp.Main")
+}
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
